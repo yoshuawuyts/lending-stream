@@ -1,0 +1,20 @@
+[package]
+name = "lending-stream"
+version = "1.0.0"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/yoshuawuyts/lending-stream"
+documentation = "https://docs.rs/lending-stream"
+description = "A lending version of Stream"
+readme = "README.md"
+edition = "2018"
+keywords = []
+categories = []
+authors = [
+    "Yoshua Wuyts <rust@yosh.is>"
+]
+
+[features]
+
+[dependencies]
+
+[dev-dependencies]
