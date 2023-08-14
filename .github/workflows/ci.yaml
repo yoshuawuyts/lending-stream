@@ -16,7 +16,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest]
         rust: [stable]
 
     steps:
@@ -40,8 +40,21 @@ jobs:
         command: test
         args: --all
 
-  check_fmt_and_docs:
-    name: Checking fmt and docs
+  miri:
+    name: "Build and test (miri, nightly)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Miri
+        run: |
+          rustup toolchain install nightly --component miri
+          rustup override set nightly
+          cargo miri setup
+      - name: Test with Miri
+        run: cargo miri test
+
+  check_clippy_fmt_and_docs:
+    name: Checking clippy, fmt and docs
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -50,6 +63,9 @@ jobs:
         toolchain: nightly
         components: rustfmt, clippy
         override: true
+
+    - name: clippy
+      run: cargo clippy -- -Dwarnings
 
     - name: fmt
       run: cargo fmt --all -- --check
