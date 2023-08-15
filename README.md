@@ -47,8 +47,7 @@ $ cargo add lending-stream
 ```
 
 ## Safety
-This crate uses ``#![deny(unsafe_code)]`` to ensure everything is implemented in
-100% Safe Rust.
+We use `unsafe` in a limited way to perform pin projections.
 
 ## Contributing
 Want to join us? Check out our ["Contributing" guide][contributing] and take a
